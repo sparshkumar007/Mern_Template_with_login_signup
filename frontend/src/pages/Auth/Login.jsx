@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 
 const Login = () => {
+    let url = import.meta.env.VITE_LOCAL_SERVER;
+    if (import.meta.env.PROD) {
+        url = import.meta.env.VITE_DEPLOYED_SERVER;
+    }
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
@@ -39,7 +43,7 @@ const Login = () => {
         if (!validateForm()) return;
 
         setLoading(true);
-        const data = await fetch('http://localhost:4000/api/auth/login', {
+        const data = await fetch(`${url}/api/auth/login`, {
             method: 'POST',
             mode: 'cors',
             headers: {

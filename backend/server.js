@@ -10,9 +10,14 @@ dotenv.config();
 
 const app = express();
 
+
+let url = process.env.LOCAL_FRONTEND;
+if (process.env.IS_DELPOYED == "true") {
+    url = process.env.DEPLOYED_FRONTEND;
+}
 // Allow requests from the specified origin
 const corsOptions = {
-    origin: 'http://localhost:5173', // Allow only this origin
+    origin: url, // Allow only this origin
     optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 
